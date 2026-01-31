@@ -1,13 +1,15 @@
-private static boolean isInsurerMissing(
-        Set<Insurance<Vessel, ?>> insurances,
-        InsuranceType insuranceType) {
+/* Prevent error color on hover/focus BEFORE user interaction */
+.mdc-text-field--invalid.ng-untouched.ng-pristine:hover
+.mdc-floating-label,
+.mdc-text-field--invalid.ng-untouched.ng-pristine.mdc-text-field--focused
+.mdc-floating-label {
+  color: var(--mdc-theme-on-surface) !important;
+}
 
-    return insurances.stream()
-        .filter(i -> insuranceType.equals(i.getInsuranceType()))
-        .map(Insurance::getContracts)
-        .filter(Objects::nonNull)
-        .flatMap(Collection::stream)
-        .map(InsuranceContract::getInsurers)
-        .filter(Objects::nonNull)
-        .noneMatch(insurers -> !insurers.isEmpty());
+/* Also protect input text on hover */
+.mdc-text-field--invalid.ng-untouched.ng-pristine:hover
+.mdc-text-field__input,
+.mdc-text-field--invalid.ng-untouched.ng-pristine.mdc-text-field--focused
+.mdc-text-field__input {
+  color: var(--mdc-theme-on-surface) !important;
 }
